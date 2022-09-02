@@ -5,11 +5,6 @@
 
 using namespace std;
 
-void identify(string input_string, int length_input_string){
-    vector<char> vowels, consonant, digits, others;
-    vector<int> count_vowels, count_consonant, count_digits, count_others;
-}
-
 void categorize(){
     string input_string, longest_string = "", longest_word = "";
     int length_input_string, longest = 0, longest_word_length = 0;
@@ -18,7 +13,6 @@ void categorize(){
 
     cout << "Please enter a string:\t";
 
-    // cin >> input_string;
     getline(cin, input_string);
     
     length_input_string = input_string.length();
@@ -122,17 +116,6 @@ void categorize(){
 
 int main(){
 
-
-    // string input_string;
-    // int length_input_string;
-
-    // cout << "Please enter a string:\t";
-
-    // cin >> input_string;
-
-    // length_input_string = input_string.length();
-
-    // identify(input_string, length_input_string);
     categorize();
 
     return 0;
