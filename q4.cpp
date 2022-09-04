@@ -4,14 +4,15 @@
 #include <queue>
 #include <map>
 #include <regex>
+#include <vector>
 
 //using namespace std;
 
 int main(){
     std::stack<std::string> oper, working;
     std::queue<std::string> out;
-    std::string input;
-    std::string first, second;
+    std::string input, input_expression, first, second;
+    std::vector<std::string> chopped;
 
     std::map<std::string,int> precedence={
         {"+", 1},
@@ -21,9 +22,19 @@ int main(){
     };
 
     std::cout << "This is calculator\n>";
+    getline(std::cin, input_expression);
 
-    while(input != "="){
-        std::cin >> input;
+    std::regex chopper("([0-9]?*[.])?[0-9]+|[\\+\\-\\*\\/]");
+    auto parts_begin = std::sregex_iterator(input_expression.begin(), input_expression.end(), chopper);
+    auto parts_end = std::sregex_iterator();
+
+    for (std::sregex_iterator i = parts_begin; i != parts_end; i++){
+        chopped.push_back((*i).str());
+    }
+
+    for (std::vector<std::string>::iterator it = chopped.begin(); it != chopped.end(); it++){
+    // while(input != "="){
+        input = *it;
         if (input == "+" || input == "-" || input == "*" || input == "/"){
             if (oper.empty() || precedence.at(input) > precedence.at(oper.top())){
                 // std::cout << "Higher precedence, pushing " << input << " to operator\n";
@@ -38,8 +49,8 @@ int main(){
                 }
                 oper.push(input);
             }
-        }else if (input != "="){
-            // std::cout << "pushing " << input << " to output" << std::endl;
+        }
+        else{
             out.push(input);
         }
         
