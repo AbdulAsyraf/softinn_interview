@@ -3,6 +3,7 @@
 #include <string>
 #include <queue>
 #include <map>
+#include <regex>
 
 //using namespace std;
 
@@ -25,12 +26,12 @@ int main(){
         std::cin >> input;
         if (input == "+" || input == "-" || input == "*" || input == "/"){
             if (oper.empty() || precedence.at(input) > precedence.at(oper.top())){
-                std::cout << "Higher precedence, pushing " << input << " to operator\n";
+                // std::cout << "Higher precedence, pushing " << input << " to operator\n";
                 oper.push(input);
             }else{
                 while (!oper.empty() && precedence.at(input) <= precedence.at(oper.top())){
                     if (!oper.empty()){
-                        std::cout << "Lower or equal precedence, popping " << oper.top() << " and pushing " << input << " to operator\n";
+                        // std::cout << "Lower or equal precedence, popping " << oper.top() << " and pushing " << input << " to operator\n";
                         out.push(oper.top());
                         oper.pop();
                     }
@@ -38,58 +39,56 @@ int main(){
                 oper.push(input);
             }
         }else if (input != "="){
-            std::cout << "pushing " << input << " to output" << std::endl;
+            // std::cout << "pushing " << input << " to output" << std::endl;
             out.push(input);
         }
         
     }
-    std::cout << "or out here?\n";
     out.push(oper.top());
     oper.pop();
-    
-    std::cout << oper.top() << std::endl;
-    
-    while(!out.empty()){
-        std::cout << out.front() << " ";
-        out.pop();
+
+    // start calculating
+    while (!out.empty()){
+        if (out.front() == "+"){
+            // std::cout << "adding\n";
+            second = working.top();
+            working.pop();
+            first = working.top();
+            working.pop();
+            working.push(std::to_string(std::stof(first) + std::stof(second)));
+            out.pop();
+        }else if (out.front() == "-"){
+            // std::cout << "subtracting\n";
+            second = working.top();
+            working.pop();
+            first = working.top();
+            working.pop();
+            working.push(std::to_string(std::stof(first) - std::stof(second)));
+            out.pop();
+        }else if (out.front() == "*"){
+            // std::cout << "multiplying\n";
+            second = working.top();
+            working.pop();
+            first = working.top();
+            working.pop();
+            working.push(std::to_string(std::stof(first) * std::stof(second)));
+            out.pop();
+        }else if (out.front() == "/"){
+            // std::cout << "dividing\n";
+            second = working.top();
+            working.pop();
+            first = working.top();
+            working.pop();
+            working.push(std::to_string(std::stof(first) / std::stof(second)));
+            out.pop();
+        }else{
+            working.push(out.front());
+            // std::cout << out.front() << std::endl;
+            out.pop();
+        }
     }
 
-    //  start calculating
-    // while (!out.empty()){
-    //     if (out.front() == "+"){
-    //         std::cout << "adding\n";
-    //         second = working.top();
-    //         working.pop();
-    //         first = working.top();
-    //         working.pop();
-    //         working.push(std::to_string(std::stof(first) + std::stof(second)));
-    //     }else if (out.front() == "-"){
-    //         std::cout << "subtracting\n";
-    //         second = working.top();
-    //         working.pop();
-    //         first = working.top();
-    //         working.pop();
-    //         working.push(std::to_string(std::stof(first) - std::stof(second)));
-    //     }else if (out.front() == "*"){
-    //         std::cout << "multiplying\n";
-    //         second = working.top();
-    //         working.pop();
-    //         first = working.top();
-    //         working.pop();
-    //         working.push(std::to_string(std::stof(first) * std::stof(second)));
-    //     }else if (out.front() == "/"){
-    //         std::cout << "dividing\n";
-    //         second = working.top();
-    //         working.pop();
-    //         first = working.top();
-    //         working.pop();
-    //         working.push(std::to_string(std::stof(first) / std::stof(second)));
-    //     }else{
-    //         working.push(out.front());
-    //     }
-    // }
-
-    // std::cout << "Result is:\t" << working.top() << std::endl;
+    std::cout << "Result is:\t" << working.top() << std::endl;
 
     return 0;
 }
