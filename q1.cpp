@@ -18,9 +18,11 @@ int main(){
         cin >> integer_array[i];
     }
 
+    cout << "\nDisplaying integers\n";
+
     for (int i = 0; i < size_array; i++){
         if(integer_array[i] == 9){
-            return;
+            return 0;
         }else if (integer_array[i]%2){
             cout << "Odd\n";
         }else{

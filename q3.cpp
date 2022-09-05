@@ -5,10 +5,13 @@ using namespace std;
 
 int main(){
     int length = 10, temp_y, radius;
-    char shape = 'g', another = 'k';
+    char shape, another;
     bool repeat = true;
 
     while (repeat){
+        shape = 'g';
+        another = 'k';
+        length = 10;
         cout << "Please choose a shape\nS - Square\tT - Triangle\tD - Diamond\tC - Circle\n";
 
         while (!(tolower(shape) == 's' || tolower(shape) == 't' || tolower(shape) == 'd' || tolower(shape) == 'c')){
@@ -81,7 +84,7 @@ int main(){
             }
         }
 
-        while(another != 'Y' || another != 'y' || another != 'N' || another != 'n'){
+        while(another != 'Y' && another != 'y' && another != 'N' && another != 'n'){
             cout << "Draw another one? (Y/N)\n>";
             cin >> another;
             if (another == 'Y' || another == 'y'){
