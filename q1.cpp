@@ -2,21 +2,6 @@
 
 using namespace std;
 
-void display_int(int *input_array, int size_array){
-
-    for (int i = 0; i < size_array; i++){
-        if(input_array[i] == 9){
-            return;
-        }else if (input_array[i]%2){
-            cout << "Odd\n";
-        }else{
-            cout << input_array[i] << endl;
-        }
-    }
-
-    return;
-}
-
 int main(){
     
     int size_array;
@@ -33,7 +18,17 @@ int main(){
         cin >> integer_array[i];
     }
 
-    display_int(integer_array, size_array);
+    cout << "\nDisplaying integers\n";
+
+    for (int i = 0; i < size_array; i++){
+        if(integer_array[i] == 9){
+            return 0;
+        }else if (integer_array[i]%2){
+            cout << "Odd\n";
+        }else{
+            cout << integer_array[i] << endl;
+        }
+    }
 
     return 0;
 }

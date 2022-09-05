@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void categorize(){
+int main(){
     string input_string, longest_string = "", longest_word = "";
     int length_input_string, longest = 0, longest_word_length = 0;
     char current_char;
@@ -112,11 +112,6 @@ void categorize(){
     }
 
     cout << "\nThe longest word is \"" << longest_word << "\" with a length of " << longest_word_length << " characters"<< endl;
-}
-
-int main(){
-
-    categorize();
 
     return 0;
 }

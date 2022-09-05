@@ -21,7 +21,7 @@ int main(){
         {"/", 2}
     };
 
-    std::cout << "This is calculator\n>";
+    std::cout << "This is a calculator\n>";
     getline(std::cin, input_expression);
 
     std::regex chopper("([0-9]?*[.])?[0-9]+|[\\+\\-\\*\\/]");
@@ -33,7 +33,6 @@ int main(){
     }
 
     for (std::vector<std::string>::iterator it = chopped.begin(); it != chopped.end(); it++){
-    // while(input != "="){
         input = *it;
         if (input == "+" || input == "-" || input == "*" || input == "/"){
             if (oper.empty() || precedence.at(input) > precedence.at(oper.top())){
@@ -55,9 +54,11 @@ int main(){
         }
         
     }
-    out.push(oper.top());
-    oper.pop();
-
+    while(!oper.empty()){
+        out.push(oper.top());
+        oper.pop();
+    }
+    
     // start calculating
     while (!out.empty()){
         if (out.front() == "+"){
@@ -94,12 +95,12 @@ int main(){
             out.pop();
         }else{
             working.push(out.front());
-            // std::cout << out.front() << std::endl;
             out.pop();
         }
     }
 
     std::cout << "Result is:\t" << working.top() << std::endl;
+    
 
     return 0;
 }
