@@ -21,7 +21,7 @@ int main(){
         {"/", 2}
     };
 
-    std::cout << "This is calculator\n>";
+    std::cout << "This is a calculator\n>";
     getline(std::cin, input_expression);
 
     std::regex chopper("([0-9]?*[.])?[0-9]+|[\\+\\-\\*\\/]");
